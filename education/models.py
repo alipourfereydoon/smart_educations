@@ -5,6 +5,10 @@ from django.utils import timezone
 
 class StudentProfile(models.Model):
  user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='student_profile')
+ first_name=models.CharField(max_length=100,blank=True); last_name=models.CharField(max_length=100,blank=True)
+ national_id=models.CharField(max_length=10,unique=True,null=True,blank=True)
+ father_name=models.CharField(max_length=100,blank=True); school_name=models.CharField(max_length=160,blank=True)
+ mobile=models.CharField(max_length=11,db_index=True,blank=True)
  grade=models.CharField(max_length=40,blank=True); preferred_language=models.CharField(max_length=20,default='fa')
  created_at=models.DateTimeField(auto_now_add=True); updated_at=models.DateTimeField(auto_now=True)
  def __str__(self): return f'{self.user.get_full_name() or self.user.username} ({self.grade})'

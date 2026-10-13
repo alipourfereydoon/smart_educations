@@ -16,3 +16,13 @@ ASGI_APPLICATION='config.asgi.application'
 DATABASES={'default':{'ENGINE':'django.db.backends.sqlite3','NAME':BASE_DIR/'db.sqlite3'}}
 LANGUAGE_CODE='fa'; TIME_ZONE='Asia/Tehran'; USE_I18N=True; USE_TZ=True
 STATIC_URL='static/'; STATICFILES_DIRS=[BASE_DIR/'static']; DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS=['education.auth_backends.NationalIdMobileBackend','django.contrib.auth.backends.ModelBackend']
+LOGIN_URL='/login/'
+SESSION_COOKIE_HTTPONLY=True
+SESSION_COOKIE_SAMESITE='Lax'
+CSRF_COOKIE_SAMESITE='Lax'
+SESSION_COOKIE_SECURE=not DEBUG
+CSRF_COOKIE_SECURE=not DEBUG
+SECURE_CONTENT_TYPE_NOSNIFF=True
+X_FRAME_OPTIONS='DENY'

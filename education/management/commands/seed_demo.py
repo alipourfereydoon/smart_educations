@@ -5,8 +5,11 @@ from education.services import create_assessment_and_recommendations,create_pers
 class Command(BaseCommand):
  help='Create or refresh a Persian demo learner and sample data.'
  def handle(self,*args,**opts):
-  u,_=User.objects.get_or_create(username='ali',defaults={'first_name':'علی','last_name':'نمونه'});u.set_password('Ali12345!');u.save()
-  student,_=StudentProfile.objects.get_or_create(user=u,defaults={'grade':'پایهٔ هفتم'})
+  u,_=User.objects.get_or_create(username='demo_student',defaults={'first_name':'دانش‌آموز','last_name':'نمونه'})
+  u.set_unusable_password();u.save()
+  student,_=StudentProfile.objects.get_or_create(user=u,defaults={'first_name':'دانش‌آموز','last_name':'نمونه','grade':'پایهٔ هفتم','national_id':'0000000001','father_name':'نمونه','school_name':'مدرسهٔ دمو','mobile':'09000000001'})
+  if not student.national_id or not student.mobile:
+   student.national_id=student.national_id or '0000000001'; student.mobile=student.mobile or '09000000001'; student.save(update_fields=['national_id','mobile'])
   strategies=[('short_interactive','فعالیت تعاملی کوتاه','یادگیری در بازه‌های کوتاه با پرسش‌های فوری.',1,12,5),('practice_based','تمرین گام‌به‌گام','تمرین مسئله‌های کوتاه همراه با بازخورد.',2,20,4),('structured_study','مطالعهٔ ساختارمند','تقسیم کار به گام‌های ساده و مرور منظم.',2,25,4),('advanced_project','پروژهٔ چالشی','پروژهٔ کوچک برای به‌کارگیری آموخته‌ها.',3,35,2),('human_review','گفت‌وگوی آموزشی','بررسی انسانی برای شناخت بهتر نیازها و زمینهٔ یادگیری.',1,20,1)]
   for code,title,desc,pri,dur,freq in strategies: InterventionStrategy.objects.update_or_create(code=code,defaults={'title':title,'description':desc,'priority':pri,'duration_minutes':dur,'frequency_per_week':freq,'is_active':True})
   questionnaire,_=Questionnaire.objects.get_or_create(title='پرسش‌نامهٔ نمونهٔ یادگیری')
@@ -20,4 +23,4 @@ class Command(BaseCommand):
    Response.objects.update_or_create(student=student,question=q,questionnaire=questionnaire,defaults={'numeric_value':value})
   if not student.assessments.filter(questionnaire=questionnaire).exists(): create_assessment_and_recommendations(student,questionnaire)
   if not student.plans.filter(is_current=True).exists(): create_personalized_plan(student)
-  self.stdout.write(self.style.SUCCESS(f'Demo ready: ali / {len(questions)} questions / student id {student.id}'))
+  self.stdout.write(self.style.SUCCESS(f'Demo ready: synthetic demo profile / {len(questions)} questions / student id {student.id}. Demo identifiers are not verified credentials.'))

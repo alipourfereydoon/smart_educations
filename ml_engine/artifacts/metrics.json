@@ -1,5 +1,5 @@
 {
-  "accuracy": 0.68,
+  "accuracy": 0.88,
   "report": {
     "human_review": {
       "precision": 0.0,
@@ -8,34 +8,34 @@
       "support": 1.0
     },
     "practice_based": {
-      "precision": 0.2,
+      "precision": 0.5,
       "recall": 0.5,
-      "f1-score": 0.2857142857142857,
+      "f1-score": 0.5,
       "support": 2.0
     },
     "short_interactive": {
-      "precision": 0.9375,
-      "recall": 0.8333333333333334,
-      "f1-score": 0.8823529411764706,
+      "precision": 0.9473684210526315,
+      "recall": 1.0,
+      "f1-score": 0.972972972972973,
       "support": 18.0
     },
     "structured_study": {
-      "precision": 0.5,
-      "recall": 0.25,
-      "f1-score": 0.3333333333333333,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1-score": 0.75,
       "support": 4.0
     },
-    "accuracy": 0.68,
+    "accuracy": 0.88,
     "macro avg": {
-      "precision": 0.409375,
-      "recall": 0.39583333333333337,
-      "f1-score": 0.37535014005602235,
+      "precision": 0.5493421052631579,
+      "recall": 0.5625,
+      "f1-score": 0.5557432432432432,
       "support": 25.0
     },
     "weighted avg": {
-      "precision": 0.7709999999999999,
-      "recall": 0.68,
-      "f1-score": 0.711484593837535,
+      "precision": 0.8421052631578947,
+      "recall": 0.88,
+      "f1-score": 0.8605405405405406,
       "support": 25.0
     }
   },
